@@ -9,11 +9,9 @@ export const createTypeProduct = async (req: Request, res: Response) => {
     const data = req.body;
     const productId = data.productId;
     const product = await Product.findOne({ _id: productId });
-    console.log(product);
     data.product = product;
     const newTypeProduct = new TypeProduct(data);
     await newTypeProduct.save();
-    console.log(newTypeProduct)
     res.status(201).json(newTypeProduct);
   } catch (error) {
     res.status(500).json({ error: "Failed to create user" });
