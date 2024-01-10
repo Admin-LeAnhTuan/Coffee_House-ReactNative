@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     borderRightColor: COLORS.primaryGreyHex,
   },
   SizeText: {
-    // fontFamily: "Poppins_Medium",
+    fontFamily: FONTFAMILY.poppins_medium,
     color: COLORS.secondaryLightGreyHex,
   },
   PriceBoxRight: {
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     borderLeftColor: COLORS.primaryGreyHex,
   },
   PriceCurrency: {
-    // fontFamily: "Poppins_Semibold",
+    fontFamily: FONTFAMILY.poppins_semibold,
     fontSize: FONTSIZE.size_18,
     color: COLORS.primaryOrangeHex,
   },

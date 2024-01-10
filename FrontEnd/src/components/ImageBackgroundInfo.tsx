@@ -68,7 +68,7 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
               }}
             >
               <GradientBGIcon
-                name="like"
+                name="heart"
                 color={
                   favourite ? COLORS.primaryRedHex : COLORS.primaryLightGreyHex
                 }
@@ -84,7 +84,7 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
               }}
             >
               <GradientBGIcon
-                name="like"
+                name="heart"
                 color={
                   favourite ? COLORS.primaryRedHex : COLORS.primaryLightGreyHex
                 }
@@ -105,11 +105,11 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
               </View>
               <View style={styles.ItemPropertiesContainer}>
                 <View style={styles.ProperFirst}>
-                  <CustomIcon
+                  {/* <CustomIcon
                     name={type == "Bean" ? "bean" : "beans"}
                     size={type == "Bean" ? FONTSIZE.size_18 : FONTSIZE.size_24}
                     color={COLORS.primaryOrangeHex}
-                  />
+                  /> */}
                   <Text
                     style={[
                       styles.PropertyTextFirst,
@@ -125,24 +125,24 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
                   </Text>
                 </View>
                 <View style={styles.ProperFirst}>
-                  <CustomIcon
+                  {/* <CustomIcon
                     name={type == "Bean" ? "location" : "drop"}
                     size={FONTSIZE.size_16}
                     color={COLORS.primaryOrangeHex}
-                  />
+                  /> */}
                   <Text style={styles.PropertyTextLast}>{ingredients}</Text>
                 </View>
               </View>
             </View>
             <View style={styles.InfoContainerRow}>
               <View style={styles.RatingContainer}>
-                <CustomIcon
+                {/* <CustomIcon
                   name={"star"}
                   color={COLORS.primaryOrangeHex}
                   size={FONTSIZE.size_20}
-                />
-                <Text style={styles.RatingText}>{average_rating}</Text>
-                <Text style={styles.RatingCountText}>({ratings_count})</Text>
+                /> */}
+                {/* <Text style={styles.RatingText}>{average_rating}</Text>
+                <Text style={styles.RatingCountText}>({ratings_count})</Text> */}
               </View>
               <View style={styles.RoastedContainer}>
                 <Text style={styles.RoastedText}>{roasted}</Text>

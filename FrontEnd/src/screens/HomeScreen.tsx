@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
   },
   ScreenTitle: {
     fontSize: FONTSIZE.size_28,
-    // fontFamily: "Poppins_Semibold",
+    fontFamily: FONTFAMILY.poppins_semibold,
     color: COLORS.primaryWhiteHex,
     paddingLeft: SPACING.space_30,
   },
@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
   TextInputContainer: {
     flex: 1,
     height: SPACING.space_20 * 3,
-    // fontFamily: "Poppins_Medium",
+    fontFamily: FONTFAMILY.poppins_medium,
     fontSize: FONTSIZE.size_14,
     color: COLORS.primaryWhiteHex,
   },
@@ -381,7 +381,7 @@ const styles = StyleSheet.create({
     fontSize: FONTSIZE.size_18,
     marginLeft: SPACING.space_30,
     marginTop: SPACING.space_20,
-    // fontFamily: "Poppins_Medium",
+    fontFamily: FONTFAMILY.poppins_medium,
     color: COLORS.secondaryLightGreyHex,
   },
 });

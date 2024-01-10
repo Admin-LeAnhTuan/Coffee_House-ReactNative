@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { COLORS, SPACING } from "../themes/theme";
 // import CustomIcon from "./CustomIcon";
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 interface GradientBGIconProps {
   name: string;
@@ -24,7 +24,7 @@ const GradientBGIcon: React.FC<GradientBGIconProps> = ({
         colors={[COLORS.primaryGreyHex, COLORS.primaryBlackHex]}
         style={styles.LinearGradientBG}
       >
-        <Ionicons name={name} color={color} size={size} />
+        <AntDesign name={name} color={color} size={size} />
       </LinearGradient>
     </View>
   );

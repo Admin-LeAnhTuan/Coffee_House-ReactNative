@@ -217,12 +217,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   CartItemTitle: {
-    // fontFamily: "Poppins_Medium",
+    fontFamily: FONTFAMILY.poppins_medium,
     fontSize: FONTSIZE.size_18,
     color: COLORS.primaryWhiteHex,
   },
   CartItemSubtitle: {
-    // fontFamily: "Poppins_Regular",
+    fontFamily: FONTFAMILY.poppins_medium,
     fontSize: FONTSIZE.size_12,
     color: COLORS.secondaryLightGreyHex,
   },
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primaryDarkGreyHex,
   },
   CartItemRoastedText: {
-    // fontFamily: "Poppins_Regular",
+    fontFamily: FONTFAMILY.poppins_regular,
     fontSize: FONTSIZE.size_10,
     color: COLORS.primaryWhiteHex,
   },
@@ -261,11 +261,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   SizeText: {
-    // fontFamily: "Poppins_Medium",
+    fontFamily: FONTFAMILY.poppins_regular,
     color: COLORS.secondaryLightGreyHex,
   },
   SizeCurrency: {
-    // fontFamily: "Poppins_Semibold",
+    fontFamily: FONTFAMILY.poppins_semibold,
     fontSize: FONTSIZE.size_18,
     color: COLORS.primaryOrangeHex,
   },
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.space_4,
   },
   CartItemQuantityText: {
-    // fontFamily: "Poppins_Semibold",
+    fontFamily: FONTFAMILY.poppins_semibold,
     fontSize: FONTSIZE.size_16,
     color: COLORS.primaryWhiteHex,
   },
