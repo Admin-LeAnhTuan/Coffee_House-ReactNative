@@ -122,18 +122,18 @@ const styles = StyleSheet.create({
     right: 0,
   },
   CardRatingText: {
-    // fontFamily: "Poppins_Medium",
+    fontFamily: FONTFAMILY.poppins_medium,
     color: COLORS.primaryWhiteHex,
     lineHeight: 22,
     fontSize: FONTSIZE.size_14,
   },
   CardTitle: {
-    // fontFamily: "Poppins_Medium",
+    fontFamily: FONTFAMILY.poppins_medium,
     color: COLORS.primaryWhiteHex,
     fontSize: FONTSIZE.size_16,
   },
   CardSubtitle: {
-    // fontFamily: "Poppins_Light",
+    fontFamily: FONTFAMILY.poppins_light,
     color: COLORS.primaryWhiteHex,
     fontSize: FONTSIZE.size_10,
   },
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     marginTop: SPACING.space_15,
   },
   CardPriceCurrency: {
-    // fontFamily: "Poppins_Semibold",
+    fontFamily: FONTFAMILY.poppins_semibold,
     color: COLORS.primaryOrangeHex,
     fontSize: FONTSIZE.size_18,
   },

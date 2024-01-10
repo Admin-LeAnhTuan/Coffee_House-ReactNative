@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import LottieView from "lottie-react-native";
 import { COLORS } from "../themes/theme";
@@ -11,11 +11,15 @@ interface EmptyListAnimationProps {
 const EmptyListAnimation: React.FC<EmptyListAnimationProps> = ({ title }) => {
   return (
     <View style={styles.EmptyCartContainer}>
-      <LottieView
+      {/* <LottieView
         style={styles.LottieStyle}
         source={require("../lotties/coffeecup.json")}
         autoPlay
         loop
+      /> */}
+      <Image
+        source={require("../assets/coffee_assets/EmptyCoffee.png")}
+        style={styles.ImageStyle}
       />
       <Text style={styles.LottieText}>{title}</Text>
     </View>
@@ -26,9 +30,11 @@ const styles = StyleSheet.create({
   EmptyCartContainer: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
   },
-  LottieStyle: {
-    height: 300,
+  ImageStyle: {
+    height: 250,
+    alignContent: "center",
   },
   LottieText: {
     fontFamily: FONTFAMILY.poppins_medium,
