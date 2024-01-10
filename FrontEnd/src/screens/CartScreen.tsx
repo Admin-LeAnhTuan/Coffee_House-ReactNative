@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   ScrollView,
   StatusBar,
@@ -18,6 +18,7 @@ import CartItem from "../components/CartItem";
 const CartScreen = ({ navigation, route }: any) => {
   const CartList = useStore((state: any) => state.CartList);
   const CartPrice = useStore((state: any) => state.CartPrice);
+
   const incrementCartItemQuantity = useStore(
     (state: any) => state.incrementCartItemQuantity
   );
@@ -25,10 +26,23 @@ const CartScreen = ({ navigation, route }: any) => {
     (state: any) => state.decrementCartItemQuantity
   );
   const calculateCartPrice = useStore((state: any) => state.calculateCartPrice);
+  const addToOrderHistoryListFromCart = useStore(
+    (state: any) => state.addToOrderHistoryListFromCart
+  );
   const tabBarHeight = useBottomTabBarHeight();
 
+  // const buttonPressHandler = () => {
+  //   navigation.push("Payment", { amount: CartPrice });
+  // };
+  const [showAnimation, setShowAnimation] = useState(false);
   const buttonPressHandler = () => {
-    navigation.push("Payment", { amount: CartPrice });
+    setShowAnimation(true);
+    addToOrderHistoryListFromCart();
+    calculateCartPrice();
+    // setTimeout(() => {
+    //   setShowAnimation(false);
+    //   navigation.navigate("History");
+    // }, 2000);
   };
 
   const incrementCartItemQuantityHandler = (id: string, size: string) => {
