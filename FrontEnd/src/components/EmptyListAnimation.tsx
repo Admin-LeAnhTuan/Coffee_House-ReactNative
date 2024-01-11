@@ -21,6 +21,7 @@ const EmptyListAnimation: React.FC<EmptyListAnimationProps> = ({ title }) => {
         source={require("../assets/coffee_assets/EmptyCoffee.png")}
         style={styles.ImageStyle}
       />
+
       <Text style={styles.LottieText}>{title}</Text>
     </View>
   );
