@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import compression from "compression";
+import cors from "cors"
 // import { Server } from "socket.io";
 
 // import local
@@ -29,6 +30,7 @@ const server = http.createServer(app);
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(compression());
+app.use(cors())
 
 // use 
 app.use("/user", userRouter);
@@ -39,7 +41,6 @@ app.use("/detailOrder",categoryRouter);
 app.use("/typeProduct", typeProductRouter);
 app.use("/order", orderRouter);
 app.use("/detailOrder", detailOrderRouter);
-
 
 ConnectDatabase();
 server.listen(port, ()=> {

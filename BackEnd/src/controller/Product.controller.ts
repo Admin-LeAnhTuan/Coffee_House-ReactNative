@@ -1,29 +1,34 @@
 import { Request, Response } from "express";
 import Product from '../model/Product.model';
 import Category from "../model/Category.model"
+import {upload} from "../utils/Multer.utils"
 
 // Create a new product
 export const createProduct = async (req: Request, res: Response) => {
   try {
-    const data = req.body;
-    const newProduct = new Product(data);
-    await newProduct.save();
+      const data = req.body;
+      if(req.file) {
+        data.image = req.file?.filename;
+      }
 
-    const categoryId = data.categoryId;
-    
-    console.log(categoryId)
-    // Find the category by ID and update it
-    const category = await Category.findByIdAndUpdate(
-      categoryId,
-      { $push: { products: newProduct._id } },
-      {new: true}
-    );
-    console.log(category)
+      // Create a new product instance
+      const newProduct = new Product(data);
+      // Save the new product to the database
+      await newProduct.save();
 
+      const categoryId = data.categoryId;
+      // Find the category by ID and update it
+      const category = await Category.findByIdAndUpdate(
+        data.categoryId,
+        { $push: { products: newProduct._id } },
+        { new: true }
+      );
+      console.log(category)
 
-    res.status(201).json(newProduct);
+      res.status(201).json(newProduct);
   } catch (error) {
-    res.status(500).json({ error: "Failed to create user" });
+    console.error(error);
+    res.status(500).json({ error: 'Failed to create product' });
   }
 };
 

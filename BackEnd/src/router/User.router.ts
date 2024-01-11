@@ -6,13 +6,14 @@ import {
     updateUserById,
     deleteUserById
 } from "../controller/User.controller";
+import { upload } from "../utils/Multer.utils";
 
 const router = express.Router();
 
 router.get("/", getAllUser);
 router.post("/create", createUser);
 router.get("/:id", getUserById);
-router.put("/:id", updateUserById);
+router.put("/:id", upload.single("image"), updateUserById);
 router.delete("/:id", deleteUserById);
 
 export default router;
