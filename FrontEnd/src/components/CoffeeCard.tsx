@@ -54,43 +54,13 @@ const CoffeeCard: React.FC<CoffeeCardProps> = ({
         source={imagelink_square}
         style={styles.CardImageBG}
         resizeMode="cover"
-      >
-        <View style={styles.CardRatingContainer}>
-          <Ionicons
-            name={"star"}
-            color={COLORS.primaryOrangeHex}
-            size={FONTSIZE.size_16}
-          />
-          <Text style={styles.CardRatingText}>{average_rating}</Text>
-        </View>
-      </ImageBackground>
+      ></ImageBackground>
       <Text style={styles.CardTitle}>{name}</Text>
       <Text style={styles.CardSubtitle}>{special_ingredient}</Text>
       <View style={styles.CardFooterRow}>
         <Text style={styles.CardPriceCurrency}>
           $ <Text style={styles.CardPrice}>{price.price}</Text>
         </Text>
-        <TouchableOpacity
-          onPress={() => {
-            buttonPressHandler({
-              id,
-              index,
-              type,
-              roasted,
-              imagelink_square,
-              name,
-              special_ingredient,
-              prices: [{ ...price, quantity: 1 }],
-            });
-          }}
-        >
-          <BGIcon
-            color={COLORS.primaryWhiteHex}
-            name={"add"}
-            BGColor={COLORS.primaryOrangeHex}
-            size={FONTSIZE.size_10}
-          />
-        </TouchableOpacity>
       </View>
     </LinearGradient>
   );

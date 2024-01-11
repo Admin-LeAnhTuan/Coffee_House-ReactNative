@@ -6,7 +6,7 @@ import HomeScreen from "../screens/HomeScreen";
 import FavoritesScreen from "../screens/FavoritesScreen";
 import CartScreen from "../screens/CartScreen";
 import OrderHistoryScreen from "../screens/OrderHistoryScreen";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 
 const Tab = createBottomTabNavigator();
