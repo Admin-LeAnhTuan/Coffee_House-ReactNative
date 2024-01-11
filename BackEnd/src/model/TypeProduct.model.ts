@@ -1,22 +1,20 @@
 import mongoose, {Document, Model, Mongoose, Schema} from "mongoose";
 
 export interface TypeProductDocument extends Document {
-    product: Object,
-    toppings: mongoose.Types.ObjectId[],
+    name: String,
+    toppings: Object[]
     isDelete: boolean
 }
 
 export interface TypeProductModel extends Model<TypeProductDocument>{}
 
 const TypeProductModelSchema = new Schema<TypeProductDocument, TypeProductModel>({
-    product: {
-        type: Object,
+    name: {
+        type: String,
+        required:[true, "plase enter name type product"]
     },
     toppings: [
-        {
-            type: mongoose.Types.ObjectId,
-            ref: "toppings"
-        }
+        {type: Object}
     ],
     isDelete: {
         type: Boolean,

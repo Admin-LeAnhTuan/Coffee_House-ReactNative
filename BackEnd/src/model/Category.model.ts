@@ -3,7 +3,6 @@ import mongoose, {Document, Model, Schema} from "mongoose";
 export interface CategoryDocument extends Document {
     name: String,
     description: String,
-    products: mongoose.Types.ObjectId[],
     isDelete: boolean
 }
 
@@ -16,14 +15,8 @@ const CategorySchema = new Schema<CategoryDocument, CategoryModel>({
     },
     description: {
         type: String,
-        required: [true, "Please enter your email address"],
+        required: [true, "Please enter your description"],
     },
-    products: [
-        {
-            type: mongoose.Types.ObjectId,
-            ref: "products"
-        }
-    ],
     isDelete: {
         type: Boolean,
         default: false
