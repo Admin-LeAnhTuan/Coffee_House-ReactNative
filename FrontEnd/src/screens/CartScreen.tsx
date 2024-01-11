@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   ScrollView,
   StatusBar,
@@ -26,9 +26,19 @@ const CartScreen = ({ navigation, route }: any) => {
   );
   const calculateCartPrice = useStore((state: any) => state.calculateCartPrice);
   const tabBarHeight = useBottomTabBarHeight();
+  const addToOrderHistoryListFromCart = useStore(
+    (state: any) => state.addToOrderHistoryListFromCart
+  );
+  const [showAnimation, setShowAnimation] = useState(false);
 
   const buttonPressHandler = () => {
-    navigation.push("Payment", { amount: CartPrice });
+    setShowAnimation(true);
+    addToOrderHistoryListFromCart();
+    calculateCartPrice();
+    setTimeout(() => {
+      setShowAnimation(false);
+      navigation.navigate("History");
+    }, 2000);
   };
 
   const incrementCartItemQuantityHandler = (id: string, size: string) => {
