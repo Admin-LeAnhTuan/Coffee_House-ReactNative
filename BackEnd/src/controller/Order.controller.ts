@@ -1,22 +1,26 @@
 import { Request, Response } from "express";
 import Order from './../model/Order.model';
+import DetailOrder from "../model/DetailOrder.model"
+import User from "../model/User.model"
+import Product from "../model/Product.model"
 
 // Create a new order
 export const createOrder = async (req: Request, res: Response) => {
   try {
     const data = req.body;
-    const newOrder = new Order();
+    const newOrder = new Order(data);
     await newOrder.save();
     res.status(201).json(newOrder);
   } catch (error) {
-    res.status(500).json({ error: "Failed to create order" });
+    res.status(500).json({ error: "Failed to create user" });
   }
 };
 
 // Get all order 
 export const getAllOrder = async (req: Request, res: Response) => {
   try {
-    const orders = await Order.findOne({isdelete: false})
+    const orders = await Order.findOne({isdelete: false}).populate({ path: "DetailOrders",
+    options: { strictPopulate: false },})
     .exec();
     if (orders) {
       res.json(orders);
@@ -32,7 +36,8 @@ export const getAllOrder = async (req: Request, res: Response) => {
 export const getOrderById = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const order = await Order.findById(id).exec();
+    const order = await Order.findById(id).populate({ path: "detailOrders",
+    options: { strictPopulate: false },}).exec();
     if (order) {
       res.json(order);
     } else {

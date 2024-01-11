@@ -1,17 +1,21 @@
 import mongoose, {Document, Model, Schema} from "mongoose";
 
 export interface DetailOrderDocument extends Document {
-    products: mongoose.Types.ObjectId[],
+    product: Object,
+    toppings: mongoose.Types.ObjectId[],
     isDelete: boolean
 }
 
 export interface DetailOrderModel extends Model<DetailOrderDocument>{}
 
 const DetailOrderSchema = new Schema<DetailOrderDocument, DetailOrderModel>({
-    products: [
+    product: {
+        type: Object
+    },
+    toppings: [
         {
             type: mongoose.Types.ObjectId,
-            ref: "products"
+            ref: "toppings"
         }
     ],
     isDelete: {
@@ -21,4 +25,4 @@ const DetailOrderSchema = new Schema<DetailOrderDocument, DetailOrderModel>({
 })
 
 
-export default mongoose.model<DetailOrderDocument, DetailOrderModel>("detailOrder", DetailOrderSchema);
+export default mongoose.model<DetailOrderDocument, DetailOrderModel>("detailOrders", DetailOrderSchema);

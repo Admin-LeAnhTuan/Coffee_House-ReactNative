@@ -1,8 +1,8 @@
-import mongoose, {Document, Model, Schema} from "mongoose";
+import mongoose, {Document, Model, Schema, ObjectId} from "mongoose";
 
 export interface OrderDocument extends Document {
     user: Object,
-    DetailOrders: mongoose.Types.ObjectId[],
+    DetailOrders: mongoose.Types.ObjectId,
     note?: String,
     totalPrice: Number
     isDelete: boolean
@@ -17,7 +17,7 @@ const OrderSchema = new Schema<OrderDocument, OrderModel>({
     DetailOrders: [
         {
             type: mongoose.Types.ObjectId,
-            ref: "detailOrder"
+            ref: "detailOrders"
         }
     ],
     note: {

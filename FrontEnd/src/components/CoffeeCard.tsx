@@ -55,15 +55,9 @@ const CoffeeCard: React.FC<CoffeeCardProps> = ({
         style={styles.CardImageBG}
         resizeMode="cover"
       >
-        {/* <View style={styles.CardRatingContainer}>
-          <Ionicons
-            name={"star"}
-            color={COLORS.primaryOrangeHex}
-            size={FONTSIZE.size_16}
-          />
-          <Text style={styles.CardRatingText}>{average_rating}</Text>
-        </View> */}
+        
       </ImageBackground>
+
       <Text style={styles.CardTitle}>{name}</Text>
       <Text style={styles.CardSubtitle}>{special_ingredient}</Text>
       <View style={styles.CardFooterRow}>

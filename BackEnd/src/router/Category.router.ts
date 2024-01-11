@@ -6,7 +6,7 @@ import {
     updateCategoryById,
     deleteCategoryById
 } from "../controller/Category.controller";
-
+import {upload} from "../utils/Multer.utils"
 const router = express.Router();
 
 router.get("/", getAllCategory);

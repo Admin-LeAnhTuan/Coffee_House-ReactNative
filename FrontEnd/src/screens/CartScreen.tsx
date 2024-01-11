@@ -26,10 +26,10 @@ const CartScreen = ({ navigation, route }: any) => {
     (state: any) => state.decrementCartItemQuantity
   );
   const calculateCartPrice = useStore((state: any) => state.calculateCartPrice);
+  const tabBarHeight = useBottomTabBarHeight();
   const addToOrderHistoryListFromCart = useStore(
     (state: any) => state.addToOrderHistoryListFromCart
   );
-  const tabBarHeight = useBottomTabBarHeight();
 
   // const buttonPressHandler = () => {
   //   navigation.push("Payment", { amount: CartPrice });
@@ -39,10 +39,11 @@ const CartScreen = ({ navigation, route }: any) => {
     setShowAnimation(true);
     addToOrderHistoryListFromCart();
     calculateCartPrice();
-    // setTimeout(() => {
-    //   setShowAnimation(false);
-    //   navigation.navigate("History");
-    // }, 2000);
+
+    setTimeout(() => {
+      setShowAnimation(false);
+      navigation.navigate("History");
+    }, 2000);
   };
 
   const incrementCartItemQuantityHandler = (id: string, size: string) => {
