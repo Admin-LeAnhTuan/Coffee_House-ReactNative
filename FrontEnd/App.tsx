@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabNavigator from "./src/navigator/TabNabvigator";
 import DetailsScreen from "./src/screens/DetailsScreen";
 // import PaymentScreen from "./src/screens/PaymentScreen";
+import LoginScreen from "./src/screens/LoginScreen";
 import SplashScreen from "react-native-splash-screen";
 import { useFonts } from "expo-font";
 
@@ -26,6 +27,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ animation: "slide_from_bottom" }}
+        ></Stack.Screen>
+        {/* <Stack.Screen
           name="Tab"
           component={TabNavigator}
           options={{ animation: "slide_from_bottom" }}
@@ -34,7 +40,7 @@ export default function App() {
           name="Details"
           component={DetailsScreen}
           options={{ animation: "slide_from_bottom" }}
-        ></Stack.Screen>
+        ></Stack.Screen> */}
         {/* <Stack.Screen
           name="Payment"
           component={PaymentScreen}
