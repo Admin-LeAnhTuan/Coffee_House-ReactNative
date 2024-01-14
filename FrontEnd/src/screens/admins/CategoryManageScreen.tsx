@@ -30,8 +30,10 @@ const CategoryManageScreen = ({ navigation }: any) => {
       setData(json);
     } catch (error) {
       console.log("Error fetching data:", error);
+      console.log(error);
     }
   };
+  console.log(data);
   let deleteCategory = (id: any) => {
     fetch(`http://192.168.2.15:8080/categories/${id}`, {
       method: "DELETE",
@@ -39,12 +41,12 @@ const CategoryManageScreen = ({ navigation }: any) => {
     });
   };
 
-  let editCategory = (id: any) => {
-    fetch(`http://192.168.2.15:8080/categories/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-    });
-  };
+  // let editCategory = (id: any) => {
+  //   fetch(`http://192.168.2.15:8080/categories/${id}`, {
+  //     method: "PUT",
+  //     headers: { "Content-Type": "application/json" },
+  //   });
+  // };
   useEffect(() => {
     getCategories();
   }, []);
@@ -69,7 +71,7 @@ const CategoryManageScreen = ({ navigation }: any) => {
               <TouchableOpacity className="border rounded-3xl bg-primaryOrangeHex w-20 mx-1">
                 <Text
                   className="text-primaryWhiteHex text-size_20 text-center"
-                  onPress={navigation.push("Edit Category")}
+                  onPress={() => navigation.push("Edit Category")}
                 >
                   Edit
                 </Text>
