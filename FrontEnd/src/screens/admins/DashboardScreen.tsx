@@ -25,32 +25,34 @@ const DashboardScreen = ({ navigation }: any) => {
           contentContainerStyle={{ flexGrow: 1 }}
         >
           <View className="flex flex-row flex-wrap items-center justify-center">
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Product Manage")}
+            >
               <GradientButton
                 title="Drink Management"
                 image={require("../../assets/icons/tea-cup.png")}
               />
             </TouchableOpacity>
-            <GradientButton
-              title="Drink Management"
-              image={require("../../assets/icons/tea-cup.png")}
-            />
-            <GradientButton
-              title="Topping Management"
-              image={require("../../assets/icons/cherries.png")}
-            />
-            <GradientButton
-              title="Category Management"
-              image={require("../../assets/icons/dashboard.png")}
-            />
-            <GradientButton
-              title="Statistic"
-              image={require("../../assets/icons/signal.png")}
-            />
-            <GradientButton
-              title="Order Management"
-              image={require("../../assets/icons/order.png")}
-            />
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Category Manage")}
+            >
+              <GradientButton
+                title="Category Management"
+                image={require("../../assets/icons/dashboard.png")}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <GradientButton
+                title="Statistic"
+                image={require("../../assets/icons/signal.png")}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <GradientButton
+                title="Order Management"
+                image={require("../../assets/icons/order.png")}
+              />
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>

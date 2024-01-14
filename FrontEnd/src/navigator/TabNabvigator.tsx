@@ -8,6 +8,7 @@ import CartScreen from "../screens/CartScreen";
 import OrderHistoryScreen from "../screens/OrderHistoryScreen";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
+import DashboardScreen from "../screens/admins/DashboardScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -72,6 +73,21 @@ const TabNavigator = () => {
       <Tab.Screen
         name="History"
         component={OrderHistoryScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name="reorder-four-sharp"
+              size={24}
+              color={
+                focused ? COLORS.primaryOrangeHex : COLORS.primaryLightGreyHex
+              }
+            />
+          ),
+        }}
+      ></Tab.Screen>
+      <Tab.Screen
+        name="Dashboard"
+        component={DashboardScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons

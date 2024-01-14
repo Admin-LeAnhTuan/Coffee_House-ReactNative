@@ -6,6 +6,12 @@ import DetailsScreen from "./src/screens/DetailsScreen";
 // import PaymentScreen from "./src/screens/PaymentScreen";
 import SplashScreen from "react-native-splash-screen";
 import { useFonts } from "expo-font";
+import CategoryManageScreen from "./src/screens/admins/CategoryManageScreen";
+import ProductManageScreen from "./src/screens/admins/ProductManageScreen";
+import ToppingManageScreen from "./src/screens/admins/ToppingManageScreen";
+import OrderManageScreen from "./src/screens/admins/OrderManageScreen";
+import AddCategory from "./src/screens/admins/AddCategory";
+import EditCategory from "./src/screens/admins/EditCategory";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,11 +41,36 @@ export default function App() {
           component={DetailsScreen}
           options={{ animation: "slide_from_bottom" }}
         ></Stack.Screen>
-        {/* <Stack.Screen
-          name="Payment"
-          component={PaymentScreen}
+        <Stack.Screen
+          name="Category Manage"
+          component={CategoryManageScreen}
           options={{ animation: "slide_from_bottom" }}
-        ></Stack.Screen> */}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Product Manage"
+          component={ProductManageScreen}
+          options={{ animation: "slide_from_bottom" }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Topping Manage"
+          component={ToppingManageScreen}
+          options={{ animation: "slide_from_bottom" }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Order Manage"
+          component={OrderManageScreen}
+          options={{ animation: "slide_from_bottom" }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Add Category"
+          component={AddCategory}
+          options={{ animation: "slide_from_bottom" }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Edit Category"
+          component={EditCategory}
+          options={{ animation: "slide_from_bottom" }}
+        ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
