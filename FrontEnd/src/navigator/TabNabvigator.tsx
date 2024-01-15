@@ -6,6 +6,8 @@ import HomeScreen from "../screens/HomeScreen";
 import FavoritesScreen from "../screens/FavoritesScreen";
 import CartScreen from "../screens/CartScreen";
 import OrderHistoryScreen from "../screens/OrderHistoryScreen";
+import DrinkManagementScreen from "../screens/admins/DrinkManagementScreen";
+import MilkTeaPresetScreen from "../screens/admins/MilkTeaPresetScreen";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 
@@ -26,7 +28,7 @@ const TabNavigator = () => {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={MilkTeaPresetScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
@@ -84,6 +86,21 @@ const TabNavigator = () => {
           ),
         }}
       ></Tab.Screen>
+      {/* <Tab.Screen
+        name="DrinkManagement "
+        component={DrinkManagementScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name="reorder-four-sharp"
+              size={24}
+              color={
+                focused ? COLORS.primaryOrangeHex : COLORS.primaryLightGreyHex
+              }
+            />
+          ),
+        }}
+      ></Tab.Screen> */}
     </Tab.Navigator>
   );
 };
