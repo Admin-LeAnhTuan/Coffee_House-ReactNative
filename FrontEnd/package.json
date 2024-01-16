@@ -34,7 +34,6 @@
     "react-native-screens": "~3.22.0",
     "react-native-splash-screen": "^3.3.0",
     "zustand": "^4.4.7"
->>>>>>> b749c4cbf54ee166ab6e0dee532210628e483368
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
