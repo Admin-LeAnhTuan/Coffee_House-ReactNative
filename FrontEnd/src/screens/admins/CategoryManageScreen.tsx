@@ -23,9 +23,9 @@ const CategoryManageScreen = ({ navigation }: any) => {
   ];
 
   const [data, setData] = useState([]);
-  const getCategories = async () => {
+  let getCategories = async () => {
     try {
-      const response = await fetch("http://192.168.2.15:8080/categories/");
+      const response = await fetch("http://192.168.2.15:8080/category/");
       const json = await response.json();
       setData(json);
     } catch (error) {
@@ -33,9 +33,8 @@ const CategoryManageScreen = ({ navigation }: any) => {
       console.log(error);
     }
   };
-  console.log(data);
   let deleteCategory = (id: any) => {
-    fetch(`http://192.168.2.15:8080/categories/${id}`, {
+    fetch(`http://192.168.2.15:8080/category/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
@@ -71,7 +70,7 @@ const CategoryManageScreen = ({ navigation }: any) => {
               <TouchableOpacity className="border rounded-3xl bg-primaryOrangeHex w-20 mx-1">
                 <Text
                   className="text-primaryWhiteHex text-size_20 text-center"
-                  onPress={() => navigation.push("Edit Category")}
+                  onPress={() => navigation.push("Edit Category", category)}
                 >
                   Edit
                 </Text>

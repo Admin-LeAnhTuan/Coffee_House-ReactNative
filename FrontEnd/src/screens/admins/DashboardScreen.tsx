@@ -26,7 +26,7 @@ const DashboardScreen = ({ navigation }: any) => {
         >
           <View className="flex flex-row flex-wrap items-center justify-center">
             <TouchableOpacity
-              onPress={() => navigation.navigate("Product Manage")}
+              onPress={() => navigation.navigate("Drink Manage")}
             >
               <GradientButton
                 title="Drink Management"

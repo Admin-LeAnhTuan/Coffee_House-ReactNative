@@ -13,7 +13,7 @@ const EditCategory = ({ navigation, category }: any) => {
   category = route.params;
   const [text, onChangeText] = React.useState(category.category.name);
   let editCategory = (id: any, name: string) => {
-    fetch(`http://192.168.2.15:8080/categories/${id}`, {
+    fetch(`http://192.168.2.15:8080/category/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: name }),

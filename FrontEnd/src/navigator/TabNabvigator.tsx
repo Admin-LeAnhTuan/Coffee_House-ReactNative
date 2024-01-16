@@ -90,8 +90,8 @@ const TabNavigator = () => {
         component={DashboardScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons
-              name="reorder-four-sharp"
+            <MaterialIcons
+              name="dashboard"
               size={24}
               color={
                 focused ? COLORS.primaryOrangeHex : COLORS.primaryLightGreyHex
