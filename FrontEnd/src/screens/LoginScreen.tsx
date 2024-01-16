@@ -1,18 +1,31 @@
-import React from 'react';
-import { SafeAreaView, StyleSheet, Image, View, TextInput, Text, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet, Image, View, TextInput, Text, TouchableOpacity, ScrollView, Alert  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../redux/apiRequest';
+import { AnyAction } from 'redux';
 
 const LoginScreen = ({navigation}: any) => {
-    const [username, setUsername] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const handleLogin = () => {
-        
+
+    const dispatch = useDispatch();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const handleLogin = async () => {
+        const newUser = {
+            userName: username,
+            password: password,
+        };
+        try {
+            dispatch(loginUser(newUser)  as unknown as AnyAction);
+            // console.log(newUser);
+            Alert.alert('Success', 'Login OK ');
+        } catch (error) {
+            console.log(error);
+            Alert.alert('Error', 'Invalid username or password');
+        }
     };
     
-
-    const handleSignUpPress = () => {
-        
-    };
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.scrollContent}>
@@ -50,7 +63,7 @@ const LoginScreen = ({navigation}: any) => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.loginButtonContainer}>
-                    <TouchableOpacity style={styles.loginButton} onPress={() => {navigation.push('Profile');}}>
+                    <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
                         <Text style={styles.buttonText}>Confirm</Text>
                     </TouchableOpacity>
                 </View>

@@ -1,26 +1,31 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useEffect } from 'react';
-import { getAllCourses } from '../redux/apiRequest';
+import { getAllProducts, getAllCate, getAllUser } from '../redux/apiRequest';
 import { useDispatch, useSelector } from 'react-redux';
 import { AnyAction } from 'redux';
 
 const Test = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getAllCourses() as unknown as AnyAction);
+        dispatch(getAllProducts() as unknown as AnyAction);
+        dispatch(getAllCate() as unknown as AnyAction);
+        dispatch(getAllUser() as unknown as AnyAction);
     }, [dispatch]);
-    const products = useSelector((state: any) => state.product.listCourses);
-    //   const category = products.map((item: any) => item.category);
-    // console.log(products);
-    const data = products.data
-    console.log(data); 
+    const products = useSelector((state: any) => state.product.listProducts);
+    const cate = useSelector((state: any) => state.category.listCategory);
+    const user = useSelector((state: any) => state.user.listUser);
+    console.log(products.data);
+    console.log(cate);
+    console.log(user);
+    // const data = products.data
+    // console.log(data); 
   // In ra tên của từng danh mục
  
 
   return (
     
     <View style={styles.container}>
-        <Text style={styles.title}>Test1</Text>
+        {/* <Text style={styles.title}>Test1</Text>
             <View style={styles.listContainer}>
             <div>
                 { data && data.map((product: any) => (
@@ -34,7 +39,7 @@ const Test = () => {
                     </div>
                 ))}
             </div>
-        </View>
+        </View> */}
     </View>
   );
 };

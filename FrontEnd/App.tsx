@@ -12,6 +12,7 @@ import DashboardScreen from "./src/screens/admins/DashboardScreen";
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
 import Test from "./src/test/Test";
+import Test1 from "./src/test/Test1";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,8 +35,8 @@ export default function App() {
       <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
-          name="Test"
-          component={Test}
+          name="Login"
+          component={Test1}
           options={{ animation: "slide_from_bottom" }}
         ></Stack.Screen>
         <Stack.Screen
