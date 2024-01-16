@@ -7,7 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  ToastAndroid,
+  // ToastAndroid,
 } from "react-native";
 import { useStore } from "../store/store";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
@@ -19,11 +19,13 @@ import CoffeeCard from "../components/CoffeeCard";
 import { Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
+import { useDispatch, useSelector } from "react-redux";
+import { AnyAction } from "redux";
 
 const getCategoriesFromData = (data: any) => {
   let temp: any = {};
   for (let i = 0; i < data.length; i++) {
-    if (temp[data[i].name] == undefined) {
+    if (temp[data[i].name] === undefined) {
       temp[data[i].name] = 1;
     } else {
       temp[data[i].name]++;
@@ -34,32 +36,77 @@ const getCategoriesFromData = (data: any) => {
   return categories;
 };
 
-const getCoffeeList = (category: string, data: any) => {
-  if (category == "All") {
-    return data;
-  } else {
-    let coffeelist = data.filter((item: any) => item.name == category);
-    return coffeelist;
-  }
-};
+// const getCoffeeList = (category: string, data: any) => {
+//   if (category == "All") {
+//     return data;
+//   } else {
+//     let coffeeList = data.filter((item: any) => item.category === category);
+//     return coffeeList;
+//   }
+// };
 
 const HomeScreen = ({ navigation }: any) => {
-  const CoffeeList = useStore((state: any) => state.CoffeeList);
+  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const getCategories = async () => {
+    try {
+      const response = await fetch("http://192.168.2.15:8080/category/");
+      const json = await response.json();
+      setCategories(json);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+      console.log(error);
+    }
+  };
+  const getAllProducts = async () => {
+    try {
+      const response = await fetch("http://192.168.2.15:8080/product/");
+      const json = await response.json();
+      setData(json);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+      console.log(error);
+    }
+  };
+  // const [products, setProducts] = useState([]);
+  const [sortedCoffee, setSortedCoffee] = useState(
+    []
+    // getCoffeeList(categoryIndex.category, CoffeeList)
+  );
+
+  const getProductsByCategory = async (id_category: any) => {
+    try {
+      const response = await fetch(
+        `http://192.168.2.15:8080/product/category/${id_category}`
+      );
+      const json = await response.json();
+      setSortedCoffee(json.data);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+      console.log(error);
+    }
+  };
+
+  // console.log(data);
+  // console.log(categories);
+  const listCategories = getCategoriesFromData(categories);
+  // console.log(listCategories);
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  // const CoffeeList = useStore((state: any) => state.CoffeeList);
   const BeanList = useStore((state: any) => state.BeanList);
   const addToCart = useStore((state: any) => state.addToCart);
   const calculateCartPrice = useStore((state: any) => state.calculateCartPrice);
 
-  const [categories, setCategories] = useState(
-    getCategoriesFromData(CoffeeList)
-  );
+  // console.log(categories);
   const [searchText, setSearchText] = useState("");
   const [categoryIndex, setCategoryIndex] = useState({
     index: 0,
     category: categories[0],
   });
-  const [sortedCoffee, setSortedCoffee] = useState(
-    getCoffeeList(categoryIndex.category, CoffeeList)
-  );
 
   const ListRef: any = useRef<FlatList>();
   const tabBarHeight = useBottomTabBarHeight();
@@ -72,7 +119,7 @@ const HomeScreen = ({ navigation }: any) => {
       });
       setCategoryIndex({ index: 0, category: categories[0] });
       setSortedCoffee([
-        ...CoffeeList.filter((item: any) =>
+        ...data.filter((item: any) =>
           item.name.toLowerCase().includes(search.toLowerCase())
         ),
       ]);
@@ -85,7 +132,7 @@ const HomeScreen = ({ navigation }: any) => {
       offset: 0,
     });
     setCategoryIndex({ index: 0, category: categories[0] });
-    setSortedCoffee([...CoffeeList]);
+    setSortedCoffee([...data]);
     setSearchText("");
   };
 
@@ -110,11 +157,11 @@ const HomeScreen = ({ navigation }: any) => {
       prices,
     });
     calculateCartPrice();
-    ToastAndroid.showWithGravity(
-      `${name} is Added to Cart`,
-      ToastAndroid.SHORT,
-      ToastAndroid.CENTER
-    );
+    // ToastAndroid.showWithGravity(
+    //   `${name} is Added to Cart`,
+    //   ToastAndroid.SHORT,
+    //   ToastAndroid.CENTER
+    // );
   };
 
   return (
@@ -185,7 +232,7 @@ const HomeScreen = ({ navigation }: any) => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.CategoryScrollViewStyle}
         >
-          {categories.map((data, index) => (
+          {categories.map((category: any, index) => (
             <View
               key={index.toString()}
               style={styles.CategoryScrollViewContainer}
@@ -201,9 +248,8 @@ const HomeScreen = ({ navigation }: any) => {
                     index: index,
                     category: categories[index],
                   });
-                  setSortedCoffee([
-                    ...getCoffeeList(categories[index], CoffeeList),
-                  ]);
+                  getProductsByCategory(category._id);
+                  // console.log(sortedCoffee);
                 }}
               >
                 <Text
@@ -214,7 +260,7 @@ const HomeScreen = ({ navigation }: any) => {
                       : {},
                   ]}
                 >
-                  {data}
+                  {category.name}
                 </Text>
                 {categoryIndex.index == index ? (
                   <View style={styles.ActiveCategory} />
@@ -228,7 +274,7 @@ const HomeScreen = ({ navigation }: any) => {
 
         {/* Coffee Flatlist */}
 
-        <FlatList
+        {/* <FlatList
           ref={ListRef}
           horizontal
           ListEmptyComponent={
@@ -239,34 +285,43 @@ const HomeScreen = ({ navigation }: any) => {
           showsHorizontalScrollIndicator={false}
           data={sortedCoffee}
           contentContainerStyle={styles.FlatListContainer}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.push("Details", {
-                    index: item.index,
-                    id: item.id,
-                    type: item.type,
-                  });
-                }}
-              >
-                <CoffeeCard
-                  id={item.id}
-                  index={item.index}
-                  type={item.type}
-                  roasted={item.roasted}
-                  imagelink_square={item.imagelink_square}
-                  name={item.name}
-                  special_ingredient={item.special_ingredient}
-                  average_rating={item.average_rating}
-                  price={item.prices[2]}
-                  buttonPressHandler={CoffeCardAddToCart}
-                />
-              </TouchableOpacity>
-            );
-          }}
-        />
+          keyExtractor={(item) => item._id}
+          renderItem={({ item }) => { */}
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {sortedCoffee?.map((product: any, key: any) => {
+            if (sortedCoffee.length === 0) {
+              return (
+                <View style={styles.EmptyListContainer}>
+                  <Text style={styles.CategoryText}>No Coffee Available</Text>
+                </View>
+              );
+            } else {
+              return (
+                <View style={styles.FlatListContainer} key={key}>
+                  <TouchableOpacity
+                    key={key}
+                    onPress={() => {
+                      navigation.push("Details", {
+                        id: product._id,
+                        // type: item.type,
+                      });
+                    }}
+                  >
+                    <CoffeeCard
+                      id={product._id}
+                      // imagelink_square={product.image}
+                      name={product.nameProduct}
+                      price={product.price}
+                    />
+                  </TouchableOpacity>
+                </View>
+              );
+            }
+          })}
+        </ScrollView>
+
+        {/* }}
+        /> */}
 
         <Text style={styles.CoffeeBeansTitle}>Hot Deals</Text>
 
@@ -292,7 +347,7 @@ const HomeScreen = ({ navigation }: any) => {
                   });
                 }}
               >
-                <CoffeeCard
+                {/* <CoffeeCard
                   id={item.id}
                   index={item.index}
                   type={item.type}
@@ -302,8 +357,7 @@ const HomeScreen = ({ navigation }: any) => {
                   special_ingredient={item.special_ingredient}
                   average_rating={item.average_rating}
                   price={item.prices[2]}
-                  buttonPressHandler={CoffeCardAddToCart}
-                />
+                /> */}
               </TouchableOpacity>
             );
           }}
@@ -367,9 +421,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primaryOrangeHex,
   },
   FlatListContainer: {
-    gap: SPACING.space_20,
+    // gap: SPACING.space_20,
     paddingVertical: SPACING.space_20,
-    paddingHorizontal: SPACING.space_30,
+    paddingHorizontal: SPACING.space_10,
+    flexDirection: "row",
   },
   EmptyListContainer: {
     width: Dimensions.get("window").width - SPACING.space_30 * 2,

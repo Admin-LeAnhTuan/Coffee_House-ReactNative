@@ -15,33 +15,32 @@ import { FONTFAMILY, FONTSIZE } from "../themes/font";
 interface ImageBackgroundInfoProps {
   EnableBackHandler: boolean;
   imagelink_portrait: ImageProps;
-  type: string;
+
   id: string;
-  favourite: boolean;
+  // favourite: boolean;
   name: string;
-  special_ingredient: string;
-  ingredients: string;
-  average_rating: number;
-  ratings_count: string;
-  roasted: string;
+  // special_ingredient: string;
+  // ingredients: string;
+  // average_rating: number;
+  // ratings_count: string;
+  // roasted: string;
   BackHandler?: any;
-  ToggleFavourite: any;
+  // ToggleFavourite: any;
 }
 
 const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
   EnableBackHandler,
   imagelink_portrait,
-  type,
   id,
-  favourite,
+  // favourite,
   name,
-  special_ingredient,
-  ingredients,
-  average_rating,
-  ratings_count,
-  roasted,
+  // special_ingredient,
+  // ingredients,
+  // average_rating,
+  // ratings_count,
+  // roasted,
   BackHandler,
-  ToggleFavourite,
+  // ToggleFavourite,
 }) => {
   return (
     <View>
@@ -63,15 +62,13 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
               />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => {
-                ToggleFavourite(favourite, type, id);
-              }}
+            // onPress={() => {
+            //   ToggleFavourite(favourite, id);
+            // }}
             >
               <GradientBGIcon
                 name="heart"
-                color={
-                  favourite ? COLORS.primaryRedHex : COLORS.primaryLightGreyHex
-                }
+                color={COLORS.primaryRedHex}
                 size={FONTSIZE.size_16}
               />
             </TouchableOpacity>
@@ -79,15 +76,13 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
         ) : (
           <View style={styles.ImageHeaderBarContainerWithoutBack}>
             <TouchableOpacity
-              onPress={() => {
-                ToggleFavourite(favourite, type, id);
-              }}
+            // onPress={() => {
+            //   ToggleFavourite(favourite, id);
+            // }}
             >
               <GradientBGIcon
                 name="heart"
-                color={
-                  favourite ? COLORS.primaryRedHex : COLORS.primaryLightGreyHex
-                }
+                color={COLORS.primaryRedHex}
                 size={FONTSIZE.size_16}
               />
             </TouchableOpacity>
@@ -99,9 +94,7 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
             <View style={styles.InfoContainerRow}>
               <View>
                 <Text style={styles.ItemTitleText}>{name}</Text>
-                <Text style={styles.ItemSubtitleText}>
-                  {special_ingredient}
-                </Text>
+                <Text style={styles.ItemSubtitleText}></Text>
               </View>
               <View style={styles.ItemPropertiesContainer}>
                 <View style={styles.ProperFirst}>
@@ -110,19 +103,7 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
                     size={type == "Bean" ? FONTSIZE.size_18 : FONTSIZE.size_24}
                     color={COLORS.primaryOrangeHex}
                   /> */}
-                  <Text
-                    style={[
-                      styles.PropertyTextFirst,
-                      {
-                        marginTop:
-                          type == "Bean"
-                            ? SPACING.space_4 + SPACING.space_2
-                            : 0,
-                      },
-                    ]}
-                  >
-                    {type}
-                  </Text>
+                  <Text style={[styles.PropertyTextFirst, {}]}></Text>
                 </View>
                 <View style={styles.ProperFirst}>
                   {/* <CustomIcon
@@ -130,7 +111,7 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
                     size={FONTSIZE.size_16}
                     color={COLORS.primaryOrangeHex}
                   /> */}
-                  <Text style={styles.PropertyTextLast}>{ingredients}</Text>
+                  <Text style={styles.PropertyTextLast}></Text>
                 </View>
               </View>
             </View>
@@ -145,7 +126,7 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
                 <Text style={styles.RatingCountText}>({ratings_count})</Text> */}
               </View>
               <View style={styles.RoastedContainer}>
-                <Text style={styles.RoastedText}>{roasted}</Text>
+                <Text style={styles.RoastedText}></Text>
               </View>
             </View>
           </View>

@@ -6,6 +6,7 @@ import DetailsScreen from "./src/screens/DetailsScreen";
 // import PaymentScreen from "./src/screens/PaymentScreen";
 import { useFonts } from "expo-font";
 import CategoryManageScreen from "./src/screens/admins/CategoryManageScreen";
+import ProductManageScreen from "./src/screens/admins/ProductManageScreen";
 import ToppingManageScreen from "./src/screens/admins/ToppingManageScreen";
 import OrderManageScreen from "./src/screens/admins/OrderManageScreen";
 import AddCategory from "./src/screens/admins/AddCategory";
@@ -15,6 +16,8 @@ import AddDrinkScreen from "./src/screens/admins/AddDrinkScreen";
 import StaticScreen from "./src/screens/admins/StaticScreen";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
+import LoginScreen from "./src/screens/LoginScreen";
+import RegisterScreen from "./src/screens/RegisterScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,7 +38,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {/* <Stack.Screen
+          <Stack.Screen
             name="Register"
             component={RegisterScreen}
             options={{ animation: "slide_from_bottom" }}
@@ -44,7 +47,7 @@ export default function App() {
             name="Login"
             component={LoginScreen}
             options={{ animation: "slide_from_bottom" }}
-          ></Stack.Screen> */}
+          ></Stack.Screen>
           <Stack.Screen
             name="Tab"
             component={TabNavigator}
