@@ -13,7 +13,7 @@ interface OrderItemCardProps {
   name: string;
   imagelink_square: ImageProps;
   special_ingredient: string;
-  prices: any;
+  price: any;
   ItemPrice: string;
 }
 
@@ -22,7 +22,7 @@ const OrderItemCard: React.FC<OrderItemCardProps> = ({
   name,
   imagelink_square,
   special_ingredient,
-  prices,
+  price,
   ItemPrice,
 }) => {
   return (
@@ -46,7 +46,7 @@ const OrderItemCard: React.FC<OrderItemCardProps> = ({
           </Text>
         </View>
       </View>
-      {prices.map((data: any, index: any) => (
+      {/* {prices.map((data: any, index: any) => (
         <View key={index.toString()} style={styles.CardTableRow}>
           <View style={styles.CardTableRow}>
             <View style={styles.SizeBoxLeft}>
@@ -79,7 +79,7 @@ const OrderItemCard: React.FC<OrderItemCardProps> = ({
             </Text>
           </View>
         </View>
-      ))}
+      ))} */}
     </LinearGradient>
   );
 };

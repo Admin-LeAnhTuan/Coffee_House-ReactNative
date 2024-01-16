@@ -93,6 +93,7 @@ const DetailsScreen = ({ navigation, route }: any) => {
               id={ItemOfIndex._id}
               // favourite={ItemOfIndex.favourite}
               name={ItemOfIndex.nameProduct}
+              category={ItemOfIndex.category.name}
               // special_ingredient={ItemOfIndex.special_ingredient}
               // ingredients={ItemOfIndex.ingredients}
               // average_rating={ItemOfIndex.average_rating}
@@ -185,7 +186,7 @@ const DetailsScreen = ({ navigation, route }: any) => {
                 <Text style={styles.PriceTitle}>Price</Text>
                 <Text style={styles.PriceText}>
                   {/* {price.currency}  */}
-                  <Text style={styles.Price}>{ItemOfIndex.price}K</Text>
+                  <Text style={styles.Price}>${ItemOfIndex.price}</Text>
                 </Text>
               </View>
               <TouchableOpacity
@@ -224,7 +225,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTFAMILY.poppins_semibold,
     fontSize: FONTSIZE.size_16,
     color: COLORS.primaryWhiteHex,
-    marginBottom: SPACING.space_10,
+    marginBottom: SPACING.space_18,
   },
   DescriptionText: {
     letterSpacing: 0.5,

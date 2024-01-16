@@ -19,6 +19,7 @@ interface ImageBackgroundInfoProps {
   id: string;
   // favourite: boolean;
   name: string;
+  category: string;
   // special_ingredient: string;
   // ingredients: string;
   // average_rating: number;
@@ -34,6 +35,7 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
   id,
   // favourite,
   name,
+  category,
   // special_ingredient,
   // ingredients,
   // average_rating,
@@ -94,7 +96,9 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
             <View style={styles.InfoContainerRow}>
               <View>
                 <Text style={styles.ItemTitleText}>{name}</Text>
-                <Text style={styles.ItemSubtitleText}></Text>
+                <Text style={styles.ItemSubtitleText}>
+                  Enjoy your favorite drink
+                </Text>
               </View>
               <View style={styles.ItemPropertiesContainer}>
                 <View style={styles.ProperFirst}>
@@ -126,7 +130,7 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
                 <Text style={styles.RatingCountText}>({ratings_count})</Text> */}
               </View>
               <View style={styles.RoastedContainer}>
-                <Text style={styles.RoastedText}></Text>
+                <Text style={styles.RoastedText}>{category}</Text>
               </View>
             </View>
           </View>

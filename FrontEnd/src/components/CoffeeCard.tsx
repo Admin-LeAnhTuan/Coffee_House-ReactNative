@@ -39,7 +39,7 @@ const CoffeeCard: React.FC<CoffeeCardProps> = ({
       colors={[COLORS.primaryGreyHex, COLORS.primaryBlackHex]}
     >
       <ImageBackground
-        source={require("../assets/icon.png")}
+        source={require("../assets/coffee_assets/americano/square/americano_pic_1_square.png")}
         style={styles.CardImageBG}
         resizeMode="cover"
       ></ImageBackground>

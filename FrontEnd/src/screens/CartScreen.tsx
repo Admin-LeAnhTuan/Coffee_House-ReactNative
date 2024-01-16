@@ -17,7 +17,7 @@ import CartItem from "../components/CartItem";
 
 const CartScreen = ({ navigation, route }: any) => {
   const CartList = useStore((state: any) => state.CartList);
-  const CartPrice = useStore((state: any) => state.CartPrice);
+  let CartPrice: number = 0;
 
   const incrementCartItemQuantity = useStore(
     (state: any) => state.incrementCartItemQuantity
@@ -74,34 +74,37 @@ const CartScreen = ({ navigation, route }: any) => {
               <EmptyListAnimation title={"Cart is Empty"} />
             ) : (
               <View style={styles.ListItemContainer}>
-                {CartList.map((data: any) => (
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.push("Details", {
-                        index: data.index,
-                        id: data.id,
-                        type: data.type,
-                      });
-                    }}
-                    key={data.id}
-                  >
-                    <CartItem
-                      id={data.id}
-                      name={data.name}
-                      imagelink_square={data.imagelink_square}
-                      special_ingredient={data.special_ingredient}
-                      roasted={data.roasted}
-                      prices={data.prices}
-                      type={data.type}
-                      incrementCartItemQuantityHandler={
-                        incrementCartItemQuantityHandler
-                      }
-                      decrementCartItemQuantityHandler={
-                        decrementCartItemQuantityHandler
-                      }
-                    />
-                  </TouchableOpacity>
-                ))}
+                {CartList.map((data: any) => {
+                  CartPrice += data.price;
+                  return (
+                    <TouchableOpacity
+                      onPress={() => {
+                        navigation.push("Details", {
+                          index: data.index,
+                          id: data.id,
+                          type: data.type,
+                        });
+                      }}
+                      key={data.id}
+                    >
+                      <CartItem
+                        id={data.id}
+                        name={data.name}
+                        // imagelink_square={data.imagelink_square}
+                        // special_ingredient={data.special_ingredient}
+                        // roasted={data.roasted}
+                        price={data.price}
+                        // type={data.type}
+                        // incrementCartItemQuantityHandler={
+                        //   incrementCartItemQuantityHandler
+                        // }
+                        // decrementCartItemQuantityHandler={
+                        //   decrementCartItemQuantityHandler
+                        // }
+                      />
+                    </TouchableOpacity>
+                  );
+                })}
               </View>
             )}
           </View>
@@ -110,7 +113,7 @@ const CartScreen = ({ navigation, route }: any) => {
             <PaymentFooter
               buttonPressHandler={buttonPressHandler}
               buttonTitle="Pay"
-              price={{ price: CartPrice, currency: "$" }}
+              price={{ price: CartPrice.toString(), currency: "$" }}
             />
           ) : (
             <></>

@@ -6,7 +6,7 @@ import { FONTFAMILY, FONTSIZE } from "../themes/font";
 
 interface PriceProps {
   price: string;
-  // currency: string;
+  currency: string;
 }
 
 interface PaymentFooterProps {
@@ -25,7 +25,7 @@ const PaymentFooter: React.FC<PaymentFooterProps> = ({
       <View style={styles.PriceContainer}>
         <Text style={styles.PriceTitle}>Price</Text>
         <Text style={styles.PriceText}>
-          {/* {price.currency}  */}
+          {price.currency}
           <Text style={styles.Price}>{price.price}</Text>
         </Text>
       </View>

@@ -117,7 +117,7 @@ const AddDrinkScreen = ({ navigation }: any) => {
             items={items}
             setOpen={setOpen}
             setValue={setValue}
-            // setItems={setItems}
+            setItems={setItems}
             style={{
               backgroundColor: "#252A32",
               marginBottom: 10,
@@ -201,8 +201,6 @@ const AddDrinkScreen = ({ navigation }: any) => {
   );
 };
 
-export default AddDrinkScreen;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -278,3 +276,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default AddDrinkScreen;
