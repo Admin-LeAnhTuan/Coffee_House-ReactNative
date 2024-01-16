@@ -37,6 +37,13 @@ const CartItem: React.FC<CartItemProps> = ({
   // type,
   // incrementCartItemQuantityHandler,
   // decrementCartItemQuantityHandler,
+  // imagelink_square,
+  // special_ingredient,
+  // roasted,
+  price,
+  // type,
+  // incrementCartItemQuantityHandler,
+  // decrementCartItemQuantityHandler,
 }) => {
   return (
     <View>
@@ -73,7 +80,7 @@ const CartItem: React.FC<CartItemProps> = ({
             </View>
             <Text style={styles.SizeCurrency}>
               {/* {data.currency} */}
-              <Text style={styles.SizePrice}>{price}K</Text>
+              <Text style={styles.SizePrice}>${price}</Text>
             </Text>
           </View>
           <View style={styles.CartItemSizeValueContainer}>
@@ -89,9 +96,9 @@ const CartItem: React.FC<CartItemProps> = ({
                 size={FONTSIZE.size_10}
               />
             </TouchableOpacity>
-            {/* <View style={styles.CartItemQuantityContainer}>
-              <Text style={styles.CartItemQuantityText}>{data.quantity}</Text>
-            </View> */}
+            <View style={styles.CartItemQuantityContainer}>
+              <Text style={styles.CartItemQuantityText}>1</Text>
+            </View>
             <TouchableOpacity
               style={styles.CartItemIcon}
               // onPress={() => {

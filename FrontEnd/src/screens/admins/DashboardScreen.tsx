@@ -33,32 +33,26 @@ const DashboardScreen = ({ navigation }: any) => {
                 image={require("../../assets/icons/tea-cup.png")}
               />
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Category Manage")}
-            >
-              <GradientButton
-                title="Category Management"
-                image={require("../../assets/icons/dashboard.png")}
-              />
-            </TouchableOpacity>
-<<<<<<< Updated upstream
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Statistic")}
-            >
-=======
-            <TouchableOpacity>
->>>>>>> Stashed changes
-              <GradientButton
-                title="Statistic"
-                image={require("../../assets/icons/signal.png")}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <GradientButton
-                title="Order Management"
-                image={require("../../assets/icons/order.png")}
-              />
-            </TouchableOpacity>
+            <GradientButton
+              title="Drink Management"
+              image={require("../../assets/icons/tea-cup.png")}
+            />
+            <GradientButton
+              title="Topping Management"
+              image={require("../../assets/icons/cherries.png")}
+            />
+            <GradientButton
+              title="Category Management"
+              image={require("../../assets/icons/dashboard.png")}
+            />
+            <GradientButton
+              title="Statistic"
+              image={require("../../assets/icons/signal.png")}
+            />
+            <GradientButton
+              title="Order Management"
+              image={require("../../assets/icons/order.png")}
+            />
           </View>
         </ScrollView>
       </View>

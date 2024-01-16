@@ -21,20 +21,26 @@ import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import { useDispatch, useSelector } from "react-redux";
 import { AnyAction } from "redux";
+import {
+  getAllCate,
+  getAllProducts,
+  getAllUser,
+  getProductsByCategory,
+} from "../redux/apiRequest";
 
-const getCategoriesFromData = (data: any) => {
-  let temp: any = {};
-  for (let i = 0; i < data.length; i++) {
-    if (temp[data[i].name] === undefined) {
-      temp[data[i].name] = 1;
-    } else {
-      temp[data[i].name]++;
-    }
-  }
-  let categories = Object.keys(temp);
-  categories.unshift("All");
-  return categories;
-};
+// const getCategoriesFromData = (data: any) => {
+//   let temp: any = {};
+//   for (let i = 0; i < data.length; i++) {
+//     if (temp[data[i].category.name] === undefined) {
+//       temp[data[i].category.name] = 1;
+//     } else {
+//       temp[data[i].category.name]++;
+//     }
+//   }
+//   let categories = Object.keys(temp);
+//   categories.unshift("All");
+//   return categories;
+// };
 
 // const getCoffeeList = (category: string, data: any) => {
 //   if (category == "All") {
@@ -59,16 +65,16 @@ const HomeScreen = ({ navigation }: any) => {
       console.log(error);
     }
   };
-  const getAllProducts = async () => {
-    try {
-      const response = await fetch("http://192.168.2.15:8080/product/");
-      const json = await response.json();
-      setData(json);
-    } catch (error) {
-      console.log("Error fetching data:", error);
-      console.log(error);
-    }
-  };
+  // const getAllProducts = async () => {
+  //   try {
+  //     const response = await fetch("http://192.168.2.15:8080/product/");
+  //     const json = await response.json();
+  //     setData(json);
+  //   } catch (error) {
+  //     console.log("Error fetching data:", error);
+  //     console.log(error);
+  //   }
+  // };
   // const [products, setProducts] = useState([]);
   const [sortedCoffee, setSortedCoffee] = useState(
     []
@@ -88,13 +94,38 @@ const HomeScreen = ({ navigation }: any) => {
     }
   };
 
+  function handleProductsByCate(id: any) {
+    try {
+      dispatch(getProductsByCategory(id) as unknown as AnyAction);
+      // console.log(newUser);
+      // navigation.goBack();
+    } catch (error) {
+      console.log(error);
+      // Alert.alert("Error", "Invalid username or password");
+    }
+  }
+
   // console.log(data);
   // console.log(categories);
-  const listCategories = getCategoriesFromData(categories);
+  // const listCategories = getCategoriesFromData(categories);
   // console.log(listCategories);
+
   useEffect(() => {
-    getCategories();
-  }, []);
+    // getCategories();
+    dispatch(getAllProducts() as unknown as AnyAction);
+    dispatch(getAllCate() as unknown as AnyAction);
+    // dispatch(getAllUser() as unknown as AnyAction);
+  }, [dispatch]);
+  const products = useSelector((state: any) => state.product.listProducts);
+  const cate = useSelector((state: any) => state.category.listCategory);
+  // const user = useSelector((state: any) => state.user.listUser);
+  // console.log(products.data);
+  // console.log(cate);
+  // console.log(user);
+  const listProducts = products.data;
+  // useEffect(() => {
+  //   getCategories();
+  // }, []);
 
   // const CoffeeList = useStore((state: any) => state.CoffeeList);
   const BeanList = useStore((state: any) => state.BeanList);
@@ -118,11 +149,11 @@ const HomeScreen = ({ navigation }: any) => {
         offset: 0,
       });
       setCategoryIndex({ index: 0, category: categories[0] });
-      setSortedCoffee([
-        ...data.filter((item: any) =>
-          item.name.toLowerCase().includes(search.toLowerCase())
-        ),
-      ]);
+      // setSortedCoffee([
+      //   ...data.filter((item: any) =>
+      //     item.name.toLowerCase().includes(search.toLowerCase())
+      //   ),
+      // ]);
     }
   };
 
@@ -132,37 +163,37 @@ const HomeScreen = ({ navigation }: any) => {
       offset: 0,
     });
     setCategoryIndex({ index: 0, category: categories[0] });
-    setSortedCoffee([...data]);
+    // setSortedCoffee([...data]);
     setSearchText("");
   };
 
-  const CoffeCardAddToCart = ({
-    id,
-    index,
-    name,
-    roasted,
-    imagelink_square,
-    special_ingredient,
-    type,
-    prices,
-  }: any) => {
-    addToCart({
-      id,
-      index,
-      name,
-      roasted,
-      imagelink_square,
-      special_ingredient,
-      type,
-      prices,
-    });
-    calculateCartPrice();
-    // ToastAndroid.showWithGravity(
-    //   `${name} is Added to Cart`,
-    //   ToastAndroid.SHORT,
-    //   ToastAndroid.CENTER
-    // );
-  };
+  // const CoffeCardAddToCart = ({
+  //   id,
+  //   index,
+  //   name,
+  //   roasted,
+  //   imagelink_square,
+  //   special_ingredient,
+  //   type,
+  //   prices,
+  // }: any) => {
+  //   addToCart({
+  //     id,
+  //     index,
+  //     name,
+  //     roasted,
+  //     imagelink_square,
+  //     special_ingredient,
+  //     type,
+  //     prices,
+  //   });
+  //   calculateCartPrice();
+  //   // ToastAndroid.showWithGravity(
+  //   //   `${name} is Added to Cart`,
+  //   //   ToastAndroid.SHORT,
+  //   //   ToastAndroid.CENTER
+  //   // );
+  // };
 
   return (
     <View style={styles.ScreenContainer}>
@@ -225,6 +256,43 @@ const HomeScreen = ({ navigation }: any) => {
           )}
         </View>
 
+        <Text style={styles.CoffeeBeansTitle}>Hot Deals</Text>
+
+        {/* Beans Flatlist */}
+
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {listProducts?.map((product: any, key: any) => {
+            if (listProducts.length === 0) {
+              return (
+                <View style={styles.EmptyListContainer}>
+                  <Text style={styles.CategoryText}>No Coffee Available</Text>
+                </View>
+              );
+            } else {
+              return (
+                <View style={styles.FlatListContainer} key={key}>
+                  <TouchableOpacity
+                    key={key}
+                    onPress={() => {
+                      navigation.push("Details", {
+                        id: product._id,
+                        // type: item.type,
+                      });
+                    }}
+                  >
+                    <CoffeeCard
+                      id={product._id}
+                      // imagelink_square={product.image}
+                      name={product.nameProduct}
+                      price={product.price}
+                    />
+                  </TouchableOpacity>
+                </View>
+              );
+            }
+          })}
+        </ScrollView>
+
         {/* Category Scroller */}
 
         <ScrollView
@@ -232,44 +300,47 @@ const HomeScreen = ({ navigation }: any) => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.CategoryScrollViewStyle}
         >
-          {categories.map((category: any, index) => (
-            <View
-              key={index.toString()}
-              style={styles.CategoryScrollViewContainer}
-            >
-              <TouchableOpacity
-                style={styles.CategoryScrollViewItem}
-                onPress={() => {
-                  ListRef?.current?.scrollToOffset({
-                    animated: true,
-                    offset: 0,
-                  });
-                  setCategoryIndex({
-                    index: index,
-                    category: categories[index],
-                  });
-                  getProductsByCategory(category._id);
-                  // console.log(sortedCoffee);
-                }}
+          {cate.map((category: any, index: any) => {
+            return (
+              <View
+                key={index.toString()}
+                style={styles.CategoryScrollViewContainer}
               >
-                <Text
-                  style={[
-                    styles.CategoryText,
-                    categoryIndex.index == index
-                      ? { color: COLORS.primaryOrangeHex }
-                      : {},
-                  ]}
+                <TouchableOpacity
+                  style={styles.CategoryScrollViewItem}
+                  onPress={() => {
+                    ListRef?.current?.scrollToOffset({
+                      animated: true,
+                      offset: 0,
+                    });
+                    setCategoryIndex({
+                      index: index,
+                      category: categories[index],
+                    });
+                    // getProductsByCategory(category._id);
+                    getProductsByCategory(category._id);
+                    console.log(sortedCoffee);
+                  }}
                 >
-                  {category.name}
-                </Text>
-                {categoryIndex.index == index ? (
-                  <View style={styles.ActiveCategory} />
-                ) : (
-                  <></>
-                )}
-              </TouchableOpacity>
-            </View>
-          ))}
+                  <Text
+                    style={[
+                      styles.CategoryText,
+                      categoryIndex.index == index
+                        ? { color: COLORS.primaryOrangeHex }
+                        : {},
+                    ]}
+                  >
+                    {category.name}
+                  </Text>
+                  {categoryIndex.index == index ? (
+                    <View style={styles.ActiveCategory} />
+                  ) : (
+                    <></>
+                  )}
+                </TouchableOpacity>
+              </View>
+            );
+          })}
         </ScrollView>
 
         {/* Coffee Flatlist */}
@@ -322,46 +393,6 @@ const HomeScreen = ({ navigation }: any) => {
 
         {/* }}
         /> */}
-
-        <Text style={styles.CoffeeBeansTitle}>Hot Deals</Text>
-
-        {/* Beans Flatlist */}
-
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={BeanList}
-          contentContainerStyle={[
-            styles.FlatListContainer,
-            { marginBottom: tabBarHeight },
-          ]}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.push("Details", {
-                    index: item.index,
-                    id: item.id,
-                    type: item.type,
-                  });
-                }}
-              >
-                {/* <CoffeeCard
-                  id={item.id}
-                  index={item.index}
-                  type={item.type}
-                  roasted={item.roasted}
-                  imagelink_square={item.imagelink_square}
-                  name={item.name}
-                  special_ingredient={item.special_ingredient}
-                  average_rating={item.average_rating}
-                  price={item.prices[2]}
-                /> */}
-              </TouchableOpacity>
-            );
-          }}
-        />
       </ScrollView>
     </View>
   );
