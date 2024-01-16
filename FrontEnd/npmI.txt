@@ -1,0 +1,2 @@
+npm install react-native-picker-select
+npm i react-native-image-picker
