@@ -2,7 +2,7 @@ import mongoose, {Document, Model, Schema, ObjectId} from "mongoose";
 
 export interface OrderDocument extends Document {
     user: Object,
-    DetailOrders: mongoose.Types.ObjectId,
+    DetailOrders: ObjectId
     note?: String,
     totalPrice: Number
     isDelete: boolean

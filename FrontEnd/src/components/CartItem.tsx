@@ -37,6 +37,13 @@ const CartItem: React.FC<CartItemProps> = ({
   // type,
   // incrementCartItemQuantityHandler,
   // decrementCartItemQuantityHandler,
+  // imagelink_square,
+  // special_ingredient,
+  // roasted,
+  price,
+  // type,
+  // incrementCartItemQuantityHandler,
+  // decrementCartItemQuantityHandler,
 }) => {
   return (
     <View>

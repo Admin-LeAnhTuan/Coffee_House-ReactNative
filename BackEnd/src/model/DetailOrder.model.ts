@@ -2,7 +2,7 @@ import mongoose, {Document, Model, Schema} from "mongoose";
 
 export interface DetailOrderDocument extends Document {
     product: Object,
-    toppings: mongoose.Types.ObjectId[],
+    toppings: Object[]
     isDelete: boolean
 }
 

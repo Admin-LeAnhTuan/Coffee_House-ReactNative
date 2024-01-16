@@ -9,6 +9,7 @@ export interface ProductDocument extends Document {
     size: String,
     info: String,
     extra_info: String,
+    typeProduct: Object[],
     isDelete: boolean
 }
 
@@ -48,6 +49,11 @@ const ProductSchema = new Schema<ProductDocument, ProductModel>({
         type: String,
         required: [true, "Please enter your extra_info"]
     },
+    typeProduct: [
+        {
+            type: Object
+        }
+    ],
     isDelete: {
         type: Boolean,
         default: false

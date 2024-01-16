@@ -16,7 +16,9 @@ interface ImageBackgroundInfoProps {
   EnableBackHandler: boolean;
   imagelink_portrait: ImageProps;
 
+
   id: string;
+  // favourite: boolean;
   // favourite: boolean;
   name: string;
   category: string;
@@ -67,6 +69,9 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
             // onPress={() => {
             //   ToggleFavourite(favourite, id);
             // }}
+            // onPress={() => {
+            //   ToggleFavourite(favourite, id);
+            // }}
             >
               <GradientBGIcon
                 name="heart"
@@ -78,6 +83,9 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
         ) : (
           <View style={styles.ImageHeaderBarContainerWithoutBack}>
             <TouchableOpacity
+            // onPress={() => {
+            //   ToggleFavourite(favourite, id);
+            // }}
             // onPress={() => {
             //   ToggleFavourite(favourite, id);
             // }}
@@ -108,6 +116,7 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
                     color={COLORS.primaryOrangeHex}
                   /> */}
                   <Text style={[styles.PropertyTextFirst, {}]}></Text>
+                  <Text style={[styles.PropertyTextFirst, {}]}></Text>
                 </View>
                 <View style={styles.ProperFirst}>
                   {/* <CustomIcon
@@ -115,6 +124,7 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
                     size={FONTSIZE.size_16}
                     color={COLORS.primaryOrangeHex}
                   /> */}
+                  <Text style={styles.PropertyTextLast}></Text>
                   <Text style={styles.PropertyTextLast}></Text>
                 </View>
               </View>
