@@ -21,20 +21,26 @@ import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import { useDispatch, useSelector } from "react-redux";
 import { AnyAction } from "redux";
+import {
+  getAllCate,
+  getAllProducts,
+  getAllUser,
+  getProductsByCategory,
+} from "../redux/apiRequest";
 
-const getCategoriesFromData = (data: any) => {
-  let temp: any = {};
-  for (let i = 0; i < data.length; i++) {
-    if (temp[data[i].name] === undefined) {
-      temp[data[i].name] = 1;
-    } else {
-      temp[data[i].name]++;
-    }
-  }
-  let categories = Object.keys(temp);
-  categories.unshift("All");
-  return categories;
-};
+// const getCategoriesFromData = (data: any) => {
+//   let temp: any = {};
+//   for (let i = 0; i < data.length; i++) {
+//     if (temp[data[i].category.name] === undefined) {
+//       temp[data[i].category.name] = 1;
+//     } else {
+//       temp[data[i].category.name]++;
+//     }
+//   }
+//   let categories = Object.keys(temp);
+//   categories.unshift("All");
+//   return categories;
+// };
 
 // const getCoffeeList = (category: string, data: any) => {
 //   if (category == "All") {
@@ -59,42 +65,67 @@ const HomeScreen = ({ navigation }: any) => {
       console.log(error);
     }
   };
-  const getAllProducts = async () => {
-    try {
-      const response = await fetch("http://192.168.2.15:8080/product/");
-      const json = await response.json();
-      setData(json);
-    } catch (error) {
-      console.log("Error fetching data:", error);
-      console.log(error);
-    }
-  };
+  // const getAllProducts = async () => {
+  //   try {
+  //     const response = await fetch("http://192.168.2.15:8080/product/");
+  //     const json = await response.json();
+  //     setData(json);
+  //   } catch (error) {
+  //     console.log("Error fetching data:", error);
+  //     console.log(error);
+  //   }
+  // };
   // const [products, setProducts] = useState([]);
   const [sortedCoffee, setSortedCoffee] = useState(
     []
     // getCoffeeList(categoryIndex.category, CoffeeList)
   );
 
-  const getProductsByCategory = async (id_category: any) => {
+  // const getProductsByCategory = async (id_category: any) => {
+  //   try {
+  //     const response = await fetch(
+  //       `http://192.168.2.15:8080/product/category/${id_category}`
+  //     );
+  //     const json = await response.json();
+  //     setSortedCoffee(json.data);
+  //   } catch (error) {
+  //     console.log("Error fetching data:", error);
+  //     console.log(error);
+  //   }
+  // };
+
+  const handleProductsByCate = (id: any) => {
     try {
-      const response = await fetch(
-        `http://192.168.2.15:8080/product/category/${id_category}`
-      );
-      const json = await response.json();
-      setSortedCoffee(json.data);
+      dispatch(getProductsByCategory(id) as unknown as AnyAction);
+      // console.log(newUser);
+      // navigation.goBack();
     } catch (error) {
-      console.log("Error fetching data:", error);
       console.log(error);
+      // Alert.alert("Error", "Invalid username or password");
     }
   };
 
   // console.log(data);
   // console.log(categories);
-  const listCategories = getCategoriesFromData(categories);
+  // const listCategories = getCategoriesFromData(categories);
   // console.log(listCategories);
+
   useEffect(() => {
-    getCategories();
-  }, []);
+    // getCategories();
+    dispatch(getAllProducts() as unknown as AnyAction);
+    dispatch(getAllCate() as unknown as AnyAction);
+    dispatch(getAllUser() as unknown as AnyAction);
+  }, [dispatch]);
+  const products = useSelector((state: any) => state.product.listProducts);
+  const cate = useSelector((state: any) => state.category.listCategory);
+  const user = useSelector((state: any) => state.user.listUser);
+  console.log(products.data);
+  console.log(cate);
+  // console.log(user);
+  const listProducts = products.data;
+  // useEffect(() => {
+  //   getCategories();
+  // }, []);
 
   // const CoffeeList = useStore((state: any) => state.CoffeeList);
   const BeanList = useStore((state: any) => state.BeanList);
@@ -136,33 +167,33 @@ const HomeScreen = ({ navigation }: any) => {
     setSearchText("");
   };
 
-  const CoffeCardAddToCart = ({
-    id,
-    index,
-    name,
-    roasted,
-    imagelink_square,
-    special_ingredient,
-    type,
-    prices,
-  }: any) => {
-    addToCart({
-      id,
-      index,
-      name,
-      roasted,
-      imagelink_square,
-      special_ingredient,
-      type,
-      prices,
-    });
-    calculateCartPrice();
-    // ToastAndroid.showWithGravity(
-    //   `${name} is Added to Cart`,
-    //   ToastAndroid.SHORT,
-    //   ToastAndroid.CENTER
-    // );
-  };
+  // const CoffeCardAddToCart = ({
+  //   id,
+  //   index,
+  //   name,
+  //   roasted,
+  //   imagelink_square,
+  //   special_ingredient,
+  //   type,
+  //   prices,
+  // }: any) => {
+  //   addToCart({
+  //     id,
+  //     index,
+  //     name,
+  //     roasted,
+  //     imagelink_square,
+  //     special_ingredient,
+  //     type,
+  //     prices,
+  //   });
+  //   calculateCartPrice();
+  //   // ToastAndroid.showWithGravity(
+  //   //   `${name} is Added to Cart`,
+  //   //   ToastAndroid.SHORT,
+  //   //   ToastAndroid.CENTER
+  //   // );
+  // };
 
   return (
     <View style={styles.ScreenContainer}>
@@ -232,44 +263,47 @@ const HomeScreen = ({ navigation }: any) => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.CategoryScrollViewStyle}
         >
-          {categories.map((category: any, index) => (
-            <View
-              key={index.toString()}
-              style={styles.CategoryScrollViewContainer}
-            >
-              <TouchableOpacity
-                style={styles.CategoryScrollViewItem}
-                onPress={() => {
-                  ListRef?.current?.scrollToOffset({
-                    animated: true,
-                    offset: 0,
-                  });
-                  setCategoryIndex({
-                    index: index,
-                    category: categories[index],
-                  });
-                  getProductsByCategory(category._id);
-                  // console.log(sortedCoffee);
-                }}
+          {cate.map((category: any, index: any) => {
+            return (
+              <View
+                key={index.toString()}
+                style={styles.CategoryScrollViewContainer}
               >
-                <Text
-                  style={[
-                    styles.CategoryText,
-                    categoryIndex.index == index
-                      ? { color: COLORS.primaryOrangeHex }
-                      : {},
-                  ]}
+                <TouchableOpacity
+                  style={styles.CategoryScrollViewItem}
+                  onPress={() => {
+                    ListRef?.current?.scrollToOffset({
+                      animated: true,
+                      offset: 0,
+                    });
+                    setCategoryIndex({
+                      index: index,
+                      category: categories[index],
+                    });
+                    // getProductsByCategory(category._id);
+                    handleProductsByCate(category._id);
+                    // console.log(sortedCoffee);
+                  }}
                 >
-                  {category.name}
-                </Text>
-                {categoryIndex.index == index ? (
-                  <View style={styles.ActiveCategory} />
-                ) : (
-                  <></>
-                )}
-              </TouchableOpacity>
-            </View>
-          ))}
+                  <Text
+                    style={[
+                      styles.CategoryText,
+                      categoryIndex.index == index
+                        ? { color: COLORS.primaryOrangeHex }
+                        : {},
+                    ]}
+                  >
+                    {category.name}
+                  </Text>
+                  {categoryIndex.index == index ? (
+                    <View style={styles.ActiveCategory} />
+                  ) : (
+                    <></>
+                  )}
+                </TouchableOpacity>
+              </View>
+            );
+          })}
         </ScrollView>
 
         {/* Coffee Flatlist */}

@@ -14,6 +14,9 @@ import {
   createProductsStart,
   createProductsSuccess,
   createProductsFail,
+  getProductsByCateStart,
+  getProductsByCateSuccess,
+  getProductsByCateFail,
 } from "./slice/productSlice";
 import {
   getAllCateStart,
@@ -62,10 +65,22 @@ export const createUser = (newForm: any) => async (dispatch: any) => {
 export const getAllProducts = () => async (dispatch: any) => {
   dispatch(getAllProductsStart());
   try {
-    const res = await axios.get("http://192.168.19.69:8080/product/");
+    const res = await axios.get("http://192.168.2.15:8080/product/");
     dispatch(getAllProductsSuccess(res.data));
   } catch (err) {
     dispatch(getAllProductsFail());
+  }
+};
+
+export const getProductsByCategory = (id: any) => async (dispatch: any) => {
+  dispatch(getProductsByCateStart());
+  try {
+    const res = await axios.get(
+      `http://192.168.2.15:8080/product/category/${id}`
+    );
+    dispatch(getProductsByCateSuccess(res.data));
+  } catch (err) {
+    dispatch(getProductsByCateFail());
   }
 };
 
@@ -90,7 +105,7 @@ export const createProduct = (newForm: any) => async (dispatch: any) => {
 export const getAllCate = () => async (dispatch: any) => {
   dispatch(getAllCateStart());
   try {
-    const res = await axios.get("http://192.168.19.69:8080/category/");
+    const res = await axios.get("http://192.168.2.15:8080/category/");
     dispatch(getAllCateSuccess(res.data));
   } catch (err) {
     dispatch(getAllCateFail());
