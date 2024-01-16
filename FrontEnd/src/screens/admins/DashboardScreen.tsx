@@ -41,9 +41,13 @@ const DashboardScreen = ({ navigation }: any) => {
                 image={require("../../assets/icons/dashboard.png")}
               />
             </TouchableOpacity>
+<<<<<<< Updated upstream
             <TouchableOpacity
               onPress={() => navigation.navigate("Statistic")}
             >
+=======
+            <TouchableOpacity>
+>>>>>>> Stashed changes
               <GradientButton
                 title="Statistic"
                 image={require("../../assets/icons/signal.png")}
